@@ -2,11 +2,14 @@
 import { VCFChromosomRecord, VCFStats } from '@/types/vcf';
 import { ChangeEventHandler, useEffect, useRef, useState } from 'react';
 import { LoadingModal } from './LoadingModal';
+import { useVCFContext } from '@/hooks/useVCFContext';
 
 export const FileInput = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [file, setFile] = useState<File | undefined>();
   const [loading, setLoading] = useState(false);
+
+  const { setContext, value } = useVCFContext();
 
   const onClick = () => {
     if (inputRef.current) {
@@ -28,12 +31,14 @@ export const FileInput = () => {
     worker.onmessage = (e: MessageEvent<[VCFChromosomRecord, VCFStats]>) => {
       setLoading(false);
       console.log(e.data);
+      const [vcfData, vcfStats] = e.data;
+      setContext({ vcfData, vcfStats, filename: file?.name });
     };
     if (file) {
       worker.postMessage(file);
     }
     return () => worker.terminate();
-  }, [file]);
+  }, [file, setContext]);
 
   return (
     <>
@@ -46,7 +51,7 @@ export const FileInput = () => {
           className="hidden"
         />
         <p className="mr-3 italic text-sm">
-          {file?.name || 'Upload a VCF file'}
+          {file?.name || value?.filename || 'Upload a VCF file'}
         </p>
         <button
           type="button"

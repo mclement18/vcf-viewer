@@ -38,7 +38,7 @@ export const Select = <T,>({ options, selected, onChange }: SelectProps<T>) => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Listbox.Options className="absolute mt-2 py-3 w-full rounded-lg border border-slate-700 bg-black">
+          <Listbox.Options className="absolute z-40 mt-2 py-3 w-full rounded-lg border border-slate-700 bg-black">
             {options.map((option) => (
               <Listbox.Option
                 key={option.label}

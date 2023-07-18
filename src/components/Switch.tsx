@@ -19,7 +19,6 @@ export const Switch = ({
   );
 
   const onToggle = (checked: boolean) => {
-    console.log(checked);
     setLocalEnabled(checked);
     if (onChange) {
       onChange(checked);

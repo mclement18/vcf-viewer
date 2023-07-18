@@ -30,7 +30,6 @@ export const FileInput = () => {
     );
     worker.onmessage = (e: MessageEvent<[VCFChromosomRecord, VCFStats]>) => {
       setLoading(false);
-      console.log(e.data);
       const [vcfData, vcfStats] = e.data;
       setContext({ vcfData, vcfStats, filename: file?.name });
     };

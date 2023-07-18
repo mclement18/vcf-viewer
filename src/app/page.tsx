@@ -1,4 +1,5 @@
 'use client';
+import { ChartList } from '@/components/ChartList';
 import { FileInput } from '@/components/FileInput';
 import { GlobalStats } from '@/components/GlobalStats';
 import { useVCFContext } from '@/hooks/useVCFContext';
@@ -27,6 +28,7 @@ export default function Home() {
         ) : (
           <>
             <GlobalStats />
+            <ChartList />
           </>
         )}
       </div>

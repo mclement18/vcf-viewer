@@ -59,7 +59,7 @@ export const FileInput = () => {
           className="rounded-full p-2 hover:bg-slate-800 active:bg-slate-600"
         >
           <svg viewBox="0 -2 30 30" className="h-5 w-5">
-            <title>upload</title>
+            <title>Upload</title>
             <desc>Created with Sketch Beta.</desc>
             <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
               <g

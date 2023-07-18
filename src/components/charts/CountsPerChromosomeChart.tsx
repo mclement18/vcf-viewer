@@ -22,7 +22,7 @@ import type {
 import type { ComposeOption } from 'echarts/core';
 import { useCallback, useMemo } from 'react';
 import { useVCFContext } from '@/hooks/useVCFContext';
-import { map } from 'lodash';
+import map from 'lodash/map';
 import {
   averageGeneLength,
   chromosomeInfoRecord,
@@ -54,11 +54,11 @@ type ECOption = ComposeOption<
 export type CountMethod = 'RAW' | 'LEN' | 'COD' | 'LENCOD';
 
 const yAxisNamePerCountMethod: Record<CountMethod, string> = {
-  RAW: 'Variants',
-  LEN: 'Variants / Chromosome Length',
-  COD: 'Variants / \nChromosome Coding \nRegions Overall Length',
+  RAW: 'Variants (n)',
+  LEN: 'Variants (n) / Chromosome Length',
+  COD: 'Variants (n) / \nChromosome Coding \nRegions Overall Length',
   LENCOD:
-    'Variants / \n(Chromosome Length * \nChromosome Coding \nRegions Overall Length)',
+    'Variants (n) / \nChromosome Length * \nChromosome Coding \nRegions Overall Length',
 };
 
 type CountsPerChromosomeChartProps = {
@@ -149,7 +149,6 @@ export const CountsPerChromosomeChart = ({
         show: true,
         orient: 'vertical',
         left: 'right',
-        top: 'center',
         feature: {
           saveAsImage: { show: true, name: 'counts_per_chromosome' },
           magicType: { show: true, type: ['bar', 'line'] },

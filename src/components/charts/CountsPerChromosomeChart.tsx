@@ -175,6 +175,7 @@ export const CountsPerChromosomeChart = ({
       },
       xAxis: {
         type: 'category',
+        data: Object.keys(chromosomeInfoRecord),
         name: 'Chromosomes',
         nameLocation: 'middle',
         nameGap: 30,

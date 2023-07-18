@@ -31,7 +31,11 @@ export const RadioButton = <T,>({
           as={Fragment}
         >
           {({ checked }) => (
-            <Button className={checked ? 'bg-slate-600 text-slate-800' : ''}>
+            <Button
+              className={
+                checked ? '!bg-slate-600 !text-slate-800 !stroke-slate-800' : ''
+              }
+            >
               {label || (optionValue as string)}
             </Button>
           )}

@@ -23,8 +23,9 @@ import { useMemo } from 'react';
 import { useVCFContext } from '@/hooks/useVCFContext';
 import { chromosomeInfoRecord } from '@/constants/chromosome_info';
 import reduce from 'lodash/reduce';
+import filter from 'lodash/filter';
+import get from 'lodash/get';
 import { CodingConsequence, VCFChromosomRecord, VCFVariant } from '@/types/vcf';
-import { filter, get } from 'lodash';
 import {
   colorPerChromosome,
   colorPerConsequence,

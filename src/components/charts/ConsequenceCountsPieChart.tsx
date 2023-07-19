@@ -62,13 +62,6 @@ export const ConsequenceCountsPieChart = ({
           fontWeight: 'normal',
         },
       },
-      // legend: {
-      //   top: '2%',
-      //   left: 'center',
-      //   textStyle: {
-      //     color: '#fff',
-      //   },
-      // },
       dataset: {
         source: map(CODING_CONSEQUENCE, (consequence) => {
           let counts = 0;

@@ -1,34 +1,60 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# VCF Viewer
 
-## Getting Started
+A test app to explore `.vcf` files
 
-First, run the development server:
+## Starting dev server
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+First install deps
+
+```
+yarn install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then start dev server
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+yarn dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Run production
 
-## Learn More
+A production version is provided as a Docker image  
+To run it you need to have Docker installed.
 
-To learn more about Next.js, take a look at the following resources:
+First build image
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+# In the repo
+docker build -t vcf-viewer .
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Then run a container that forward the port `3000`.
 
-## Deploy on Vercel
+```
+docker run --rm -p "3000:3000" vcf-viewer
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+You can then access the app at http://localhost:3000
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Description
+
+The viewer is developed using the [**_Next.js_**](https://nextjs.org/) framework with [**_TailwindCSS_**](https://tailwindcss.com/) and [**_headlessUI_**](https://headlessui.com/) for styling and [**_Apache ECharts_**](https://echarts.apache.org/en/index.html) for charting.
+
+It consists in a single page app that allows the user to upload a `.vcf` file and then provide a graphical summary of the content. The summary is composed in two parts. The first one provides a global summary of the file content and the second one provides different visualisations of the data per chromosome and allows to easily compare charts side-by-side.
+
+The `.vcf` file must contain (apart from the standard mandatory fields) the following tags in the `ÌNFO` field:
+
+| ID       | Description                                                                                                                                                                                                      |
+| -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `NVF`    | Adjusted Allele fraction of the alternate allele with regard to reference based on graph quant                                                                                                                   |
+| `TYPE`   | Indicates whether variant is `SNP` \| `INDEL`.                                                                                                                                                                   |
+| `DBXREF` | Colon-separated key-value pairs of overlaps in database e.g. `dbSNP:rs838532,COSMIC:COSM28362`                                                                                                                   |
+| `SGVEP`  | Variant effect predicted annotations, contains a '`\|`' separated list of attributes (`gene\|gene_strand\|tx_name\|exon_rank\|c.DNA\|protein\|codingConsequence`), missing attributes are represented with '`.`' |
+
+## Reference, Data & Limitations
+
+The chart types from the second part of the summary were inspired from the **_R_** package [`plotVCF`](https://github.com/cccnrc/plot-VCF).
+
+The chromosome _lengths_ were taken from the [**GRCh37.p13**](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000001405.25/) genome assembly whereas the chromosome _gene counts_ were taken from the [**GRCh38.p14**](https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_000001405.29/) genome assembly. This discrepancy is explained by the fact that the sample data for which this tool was developed was based on the GRCh37 genome assembly which has no info on the gene counts per chromosome needed for some of the visualisations.
+
+The viewer capacity to display information regarding the variant coding consequences is limited to values found in the sample data used to develop the tool. The full list of values recognised is available in the file `src/constants/coding_consequences.ts`.

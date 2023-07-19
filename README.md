@@ -36,6 +36,8 @@ docker run --rm -p "3000:3000" vcf-viewer
 
 You can then access the app at http://localhost:3000
 
+A temporary deployed version is available here https://vcf-viewer-jsoiocq4ja-uc.a.run.app/.
+
 ## Description
 
 The viewer is developed using the [**_Next.js_**](https://nextjs.org/) framework with [**_TailwindCSS_**](https://tailwindcss.com/) and [**_headlessUI_**](https://headlessui.com/) for styling and [**_Apache ECharts_**](https://echarts.apache.org/en/index.html) for charting.

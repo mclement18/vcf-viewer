@@ -3,6 +3,7 @@ import * as echarts from 'echarts/core';
 import { PieChart } from 'echarts/charts';
 import {
   LegendComponent,
+  ToolboxComponent,
   TooltipComponent,
   DatasetComponent,
 } from 'echarts/components';
@@ -11,6 +12,7 @@ import { CanvasRenderer } from 'echarts/renderers';
 import type { PieSeriesOption } from 'echarts/charts';
 import type {
   LegendComponentOption,
+  ToolboxComponentOption,
   TooltipComponentOption,
   DatasetComponentOption,
 } from 'echarts/components';
@@ -21,6 +23,7 @@ import { useVCFContext } from '@/hooks/useVCFContext';
 echarts.use([
   PieChart,
   LegendComponent,
+  ToolboxComponent,
   TooltipComponent,
   DatasetComponent,
   CanvasRenderer,
@@ -29,6 +32,7 @@ echarts.use([
 type ECOption = ComposeOption<
   | PieSeriesOption
   | LegendComponentOption
+  | ToolboxComponentOption
   | TooltipComponentOption
   | DatasetComponentOption
 >;
@@ -43,6 +47,25 @@ export const FilteredCountsPieChart = () => {
         backgroundColor: '#000',
         textStyle: {
           color: '#fff',
+        },
+      },
+      toolbox: {
+        show: true,
+        feature: {
+          saveAsImage: {
+            show: true,
+            name: 'total_counts_per_passing_filter',
+            backgroundColor: 'rgba(0,0,0,0)',
+          },
+        },
+        iconStyle: {
+          borderColor: '#fff',
+        },
+        emphasis: {
+          iconStyle: {
+            borderColor: '#666',
+            textFill: '#fff',
+          },
         },
       },
       legend: {

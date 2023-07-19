@@ -185,7 +185,11 @@ export const VariantsPerChromosomeChart = ({
       toolbox: {
         show: true,
         feature: {
-          saveAsImage: { show: true, name: 'variants_per_chromosome' },
+          saveAsImage: {
+            show: true,
+            name: 'variants_per_chromosome',
+            backgroundColor: 'rgba(0,0,0,0)',
+          },
         },
         iconStyle: {
           borderColor: '#fff',

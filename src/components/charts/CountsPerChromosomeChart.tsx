@@ -147,10 +147,12 @@ export const CountsPerChromosomeChart = ({
       },
       toolbox: {
         show: true,
-        orient: 'vertical',
-        left: 'right',
         feature: {
-          saveAsImage: { show: true, name: 'counts_per_chromosome' },
+          saveAsImage: {
+            show: true,
+            name: 'counts_per_chromosome',
+            backgroundColor: 'rgba(0,0,0,0)',
+          },
           magicType: { show: true, type: ['bar', 'line'] },
         },
         iconStyle: {
